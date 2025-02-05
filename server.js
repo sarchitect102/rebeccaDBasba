@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require('axios');
+const req = require("express/lib/request");
 require("dotenv").config();
 // const nodemailer = require("nodemailer");
 
@@ -13,8 +14,10 @@ app.use(bodyParser.json());
 
 // Serve static files (like HTML, CSS, JS)
 app.use(express.static("public"));
- 
 
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
 // Route to handle form submission
 app.post("/submit-form", async (req, res) => {
   const { name, email, mobile, location, time, date, timeZone,  message } = req.body;
